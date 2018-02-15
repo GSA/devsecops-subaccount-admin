@@ -111,5 +111,21 @@ settings for each created account. (Requires `aws-sdk` v2)
 
 ```
 export AWS_PROFILE=mgmt_account
-ruby aws_config.rb >> ~/.aws/aws_config.rb
+ruby aws_config.rb >> ~/.aws/config
 ```
+
+## AWS Console ##
+
+To switch to the sub-account role, you will need to click on the "Switch Role"
+item in the drop-down menu under your account name at the top of the AWS
+console.
+
+![Dropdown Menu](images/capture1.png)
+
+Enter the Account ID, the `OrganizationAccountAccessRole` and useful display
+name in the input boxes and click "Switch Role"
+
+![Switch Role](images/capture2.png)
+
+Once configured, these will be available in the drop-down menu in your
+"Role History"
