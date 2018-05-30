@@ -4,8 +4,15 @@ require 'aws-sdk'
 profile = ENV['AWS_PROFILE']
 credentials = Aws::SharedCredentials.new(profile_name: profile)
 organizations = Aws::Organizations::Client.new(region: 'us-east-1', credentials: credentials)
+
 resp = organizations.list_accounts
 accounts = resp['accounts']
+
+while resp['next_token'] do
+  resp = organizations.list_accounts({next_token: resp['next_token']})
+  accounts.concat(resp['accounts'])
+end
+
 accounts.each do |account|
   # TODO: Test the role by assuming it
   # TODO: Use the assumed role to get the account alias
